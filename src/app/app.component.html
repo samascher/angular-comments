@@ -1,4 +1,12 @@
-<h1>Comments</h1>
+<h1>comments</h1>
+<h2>(leave me a piece of your mind!)</h2>
 <ul>
-    <li *ngFor="let comment of comments">{{comment}}</li>
+    <li *ngFor="let comment of comments; let index of index">{{comment.text}} {{comment.author}}
+    <button (click)="onClick(comment)">DELETE</button>
+    </li>
 </ul>
+<div>
+  <input type="text" [(ngModel)]="newQuote.text"><br>
+  <input type="text" [(ngModel)]="newQuote.author"><br>
+  <button (click)="onSubmit(text,author)">Submit</button>
+ </div>
