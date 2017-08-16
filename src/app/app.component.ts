@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 
-class quote {
-	text: string;
-	author: string;
+
+class quote{
+  update: false;
+  text:string;
+  author:string;
 }
 
 @Component({
@@ -12,29 +14,40 @@ class quote {
   styleUrls: ['./app.component.css']
 })
 
+
 export class AppComponent {
-	  newQuote:quote;
-	  constructor(){
-	  	this.newQuote = new quote();
-	  }
-
-	  comments = [
-      {text:'first comment!', author: 'unknown'},
-      {text: 'nice work!', author: 'unknown'},
-      {text: 'I would also like to congratulate you!', author: 'unknown'}
-  ];
-
-	onSubmit(text){
-		if(this.newQuote){
-			var entry = {
-				'text': this.newQuote.text,
-				'author': this.newQuote.author
-			};
-		this.comments.push(entry);
-		}	
-	}
-
-  remove(index: number){
-      this.comments.splice(index, 1);
+    updateText;
+    updateAuthor;
+    newQuote:quote;
+    constructor(){
+      this.newQuote = new quote();
     }
+    comments = [
+        {update:false, text:'first comment!', author:'me'},
+        {update:false, text:'nice work!',author:'joe'},
+        {update:false, text:'I would also like to congratulate you!',author:'linh'}
+    ];
+
+  onSubmit(){
+  	if(this.newQuote){
+      var entry ={
+        'update': false,
+        'text': this.newQuote.text,
+        'author': this.newQuote.author
+      };
+
+      this.comments.push(entry);
+    }
+  }
+
+  onDelete(i){
+    this.comments.splice(i,1)
+  }
+  
+  onUpdate(i){
+    this.comments[i].update=false;
+    this.comments[i].text= this.updateText;
+    this.comments[i].author=this.updateAuthor;
+  }
+
 }
